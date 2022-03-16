@@ -1,6 +1,7 @@
 package com.meli;
 
 import com.meli.Cliente.Cliente;
+import com.meli.Cliente.ClienteService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,25 +35,36 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        List<Cliente> clientes = new ArrayList<>();
 
-        clientes.add(new Cliente("ID123", "Antonio", "Conselheiro"));
-        clientes.add(new Cliente("ID124", "Joao", "Batista"));
-        clientes.add(new Cliente("ID222", "Maria", "Silva"));
+        ClienteService clienteService = new ClienteService();
+        clienteService.create(new Cliente("ID123", "Antonio", "Conselheiro"));
+        clienteService.create(new Cliente("ID124", "Joao", "Batista"));
+        clienteService.create(new Cliente("ID222", "Maria", "Silva"));
 
-        deleteClients(clientes);
+        clienteService.printAll();
 
-        Scanner scanner = new Scanner(System.in);
-        String input;
-        System.out.println("\n1-consultar cliente ## 2-Sair");
-        input = scanner.nextLine();
+        Cliente cliente = clienteService.read("ID124");
+        cliente.setSobrenome("Amaral");
+        clienteService.update(cliente);
 
-        while (input.equals("1")) {
+        clienteService.printAll();
 
-            searchCliente(clientes);
 
-            System.out.println("\n1-consultar cliente ## 2-Sair");
-            input = scanner.nextLine();
-        }
+//        deleteClients(clientes);
+
+
+
+//        Scanner scanner = new Scanner(System.in);
+//        String input;
+//        System.out.println("\n1-consultar cliente ## 2-Sair");
+//        input = scanner.nextLine();
+//
+//        while (input.equals("1")) {
+//
+//            searchCliente(clientes);
+//
+//            System.out.println("\n1-consultar cliente ## 2-Sair");
+//            input = scanner.nextLine();
+//        }
     }
 }

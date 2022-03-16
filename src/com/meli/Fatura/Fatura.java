@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fatura {
-    private Cliente cliente;
+    private String clienteId;
     private List<Item> items;
     private double totalCompra;
 
@@ -15,18 +15,18 @@ public class Fatura {
         this.items = new ArrayList<>();
     }
 
-    public Fatura(Cliente cliente, List<Item> items, double totalCompra) {
-        this.cliente = cliente;
+    public Fatura(String clienteId, List<Item> items, double totalCompra) {
+        this.clienteId = clienteId;
         this.items = items;
         this.totalCompra = totalCompra;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public String getCliente() {
+        return clienteId;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(String clienteId) {
+        this.clienteId = clienteId;
     }
 
     public List<Item> getItems() {
