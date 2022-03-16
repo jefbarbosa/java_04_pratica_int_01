@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fatura {
+    private String faturaId;
+
     private String clienteId;
     private List<Item> items;
     private double totalCompra;
@@ -15,17 +17,26 @@ public class Fatura {
         this.items = new ArrayList<>();
     }
 
-    public Fatura(String clienteId, List<Item> items, double totalCompra) {
+    public Fatura(String faturaId ,String clienteId, List<Item> items) {
+        this.faturaId = faturaId;
         this.clienteId = clienteId;
         this.items = items;
-        this.totalCompra = totalCompra;
+        setTotalCompra();
     }
 
-    public String getCliente() {
+    public String getFaturaId() {
+        return faturaId;
+    }
+
+    public void setFaturaId(String faturaId) {
+        this.faturaId = faturaId;
+    }
+
+    public String getClienteId() {
         return clienteId;
     }
 
-    public void setCliente(String clienteId) {
+    public void setClienteId(String clienteId) {
         this.clienteId = clienteId;
     }
 
@@ -41,7 +52,17 @@ public class Fatura {
         return totalCompra;
     }
 
-    public void setTotalCompra(double totalCompra) {
-        this.totalCompra = totalCompra;
+    private void setTotalCompra() {
+        this.totalCompra = items.stream().map(item -> item.getQuantidade()*item.getCustoUnitario()).reduce(Double::sum).orElse(-1.0);
+    }
+
+    @Override
+    public String toString() {
+        return "Fatura{" +
+                "faturaId='" + faturaId + '\'' +
+                ", clienteId='" + clienteId + '\'' +
+                ", items=\n" + items +
+                ",\ntotalCompra=" + totalCompra +
+                '}';
     }
 }
